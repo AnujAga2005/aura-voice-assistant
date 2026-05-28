@@ -6,6 +6,8 @@ import StatusText from './components/StatusText'
 import { useSpeechRecognition } from './hooks/useSpeechRecognition'
 import { useSpeechSynthesis } from './hooks/useSpeechSynthesis'
 
+const API_URL = import.meta.env.VITE_API_URL || ''
+
 const STATUS_MAP = {
   idle: 'ready',
   listening: 'listening...',
@@ -50,7 +52,7 @@ export default function App() {
     setState('thinking')
 
     try {
-      const response = await fetch('/api/chat', {
+      const response = await fetch(`${API_URL}/api/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ messages: historyRef.current }),
