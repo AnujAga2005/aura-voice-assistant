@@ -1,0 +1,123 @@
+:root {
+  --bg:        #0a0a0f;
+  --accent:    #c8b6ff;
+  --text:      #e8e6f0;
+  --muted:     #6b6880;
+  --dimmed:    #3d3a4a;
+  --danger:    #ff6b6b;
+  --face-bg:   #111118;
+  --face-ring: rgba(200, 182, 255, 0.15);
+
+  /* Responsive sizes — desktop defaults */
+  --avatar-size: 280px;
+  --mic-size: 68px;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --avatar-size: 240px;
+    --mic-size: 62px;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --avatar-size: 200px;
+    --mic-size: 56px;
+  }
+}
+
+/* ---------- Global resets ---------- */
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  overflow: hidden;
+  overflow-x: hidden;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ---------- Layout ---------- */
+
+.container {
+  height: 100dvh;
+  width: 100%;
+  overflow: hidden;
+  background: radial-gradient(ellipse 60% 60% at 50% 50%, #12101f 0%, #0a0a0f 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.appName {
+  position: absolute;
+  top: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'DM Serif Display', serif;
+  font-size: 18px;
+  color: var(--muted);
+  letter-spacing: 0.15em;
+  user-select: none;
+}
+
+.avatarWrap {
+  /* Centered by flex, no extra margin needed */
+}
+
+.statusWrap {
+  margin-top: 2rem;
+}
+
+.micWrap {
+  margin-top: 2.5rem;
+}
+
+.footer {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--dimmed);
+  user-select: none;
+}
+
+/* ---------- Unsupported browser ---------- */
+
+.unsupported {
+  height: 100dvh;
+  width: 100%;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 2rem;
+  text-align: center;
+}
+
+.unsupported p {
+  font-family: 'DM Mono', monospace;
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--accent);
+}
+
+.sub {
+  font-size: 12px !important;
+  font-weight: 300 !important;
+  color: var(--muted) !important;
+}

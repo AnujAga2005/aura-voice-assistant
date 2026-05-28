@@ -1,0 +1,14 @@
+.status {
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  user-select: none;
+}
+
+.transitioning {
+  opacity: 0;
+  transform: translateY(-4px);
+}

@@ -1,0 +1,45 @@
+.wrapper {
+  width: var(--avatar-size);
+  height: var(--avatar-size);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* State animations applied to the wrapper */
+.idle {
+  animation: breathe 4s ease-in-out infinite;
+}
+
+.listening {
+  animation: listenPulse 1.5s ease-in-out infinite;
+}
+
+.thinking {
+  animation: sway 2s ease-in-out infinite;
+}
+
+.speaking {
+  animation: none;
+}
+
+/* Listening state ring highlight */
+.listening .faceRing {
+  stroke: var(--accent);
+  stroke-opacity: 0.35;
+}
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1.00); }
+  50%       { transform: scale(1.02); }
+}
+
+@keyframes listenPulse {
+  0%, 100% { transform: scale(1.00); opacity: 1; }
+  50%       { transform: scale(1.01); opacity: 0.92; }
+}
+
+@keyframes sway {
+  0%, 100% { transform: translateX(0); }
+  50%       { transform: translateX(-4px); }
+}
