@@ -1,46 +1,44 @@
 import { useMemo } from 'react'
 import styles from './Avatar.module.css'
-
 const stateConfig = {
   idle: {
-    eyeRy: 7,
+    eyeRy: 8,
     eyeCy: 100,
-    mouthRy: 2,
-    browTransform: 'translateY(0)',
+    mouthType: 'smile',
+    browTransform: 'translateY(-1px)',
   },
   listening: {
     eyeRy: 9,
     eyeCy: 100,
+    mouthType: 'ellipse',
     mouthRy: 5,
     browTransform: 'translateY(-2px)',
   },
   thinking: {
     eyeRy: 5,
     eyeCy: 96,
+    mouthType: 'ellipse',
     mouthRy: 2,
     browTransform: 'translateY(-3px) rotate(-3deg)',
   },
   speaking: {
     eyeRy: 7,
     eyeCy: 100,
+    mouthType: 'ellipse',
     mouthRy: 3,
     browTransform: 'translateY(0)',
   },
 }
-
 export default function Avatar({ state = 'idle', mouthOpen = false }) {
   const config = stateConfig[state] || stateConfig.idle
-
   const mouthRy = useMemo(() => {
     if (state === 'speaking') {
       return mouthOpen ? 9 : 3
     }
-    return config.mouthRy
+    return config.mouthRy || 3
   }, [state, mouthOpen, config.mouthRy])
-
   const animationClass = styles[state] || styles.idle
   const transitionStyle = { transition: 'all 0.25s ease' }
-
   return (
     <div className={`${styles.wrapper} ${animationClass}`}>
       <svg
@@ -62,7 +60,6 @@ export default function Avatar({ state = 'idle', mouthOpen = false }) {
             ...transitionStyle,
           }}
         />
-
         {/* Face background */}
         <circle
           cx="100"
@@ -73,7 +70,6 @@ export default function Avatar({ state = 'idle', mouthOpen = false }) {
             ...transitionStyle,
           }}
         />
-
         {/* Brows */}
         <g style={{ transform: config.browTransform, transformOrigin: '100px 78px', ...transitionStyle }}>
           <line
@@ -97,7 +93,6 @@ export default function Avatar({ state = 'idle', mouthOpen = false }) {
             }}
           />
         </g>
-
         {/* Left eye */}
         <ellipse
           cx="82"
@@ -110,7 +105,6 @@ export default function Avatar({ state = 'idle', mouthOpen = false }) {
             ...transitionStyle,
           }}
         />
-
         {/* Right eye */}
         <ellipse
           cx="118"
@@ -123,19 +117,32 @@ export default function Avatar({ state = 'idle', mouthOpen = false }) {
             ...transitionStyle,
           }}
         />
-
         {/* Mouth */}
-        <ellipse
-          cx="100"
-          cy="125"
-          rx="10"
-          ry={mouthRy}
-          style={{
-            fill: 'var(--accent)',
-            fillOpacity: 0.6,
-            ...transitionStyle,
-          }}
-        />
+        {config.mouthType === 'smile' ? (
+          <path
+            d="M 88 122 Q 100 134 112 122"
+            style={{
+              stroke: 'var(--accent)',
+              strokeOpacity: 0.7,
+              strokeWidth: 2,
+              strokeLinecap: 'round',
+              fill: 'none',
+              ...transitionStyle,
+            }}
+          />
+        ) : (
+          <ellipse
+            cx="100"
+            cy="125"
+            rx="10"
+            ry={mouthRy}
+            style={{
+              fill: 'var(--accent)',
+              fillOpacity: 0.6,
+              ...transitionStyle,
+            }}
+          />
+        )}
       </svg>
     </div>
   )
